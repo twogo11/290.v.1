@@ -207,9 +207,9 @@ export default function ArtistPage() {
         <div className="flex items-center gap-4 text-[10px] tracking-[0.4em] text-zinc-500 uppercase">
           <Copyright size={14} className="text-amber-600" />
           <span>
-            2025 Legacy of 290.{" "}
+            TWOGO {" "}
             <span className="text-amber-500/50 italic">
-              Always facing the sun.
+              . 290
             </span>
           </span>
         </div>

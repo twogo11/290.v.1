@@ -1,26 +1,11 @@
 "use client";
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Music, Globe, Mail, Play, ExternalLink, Clock } from 'lucide-react';
+import { 
+  Music, Globe, Play, Disc, Users, Star, Sun, 
+  Calendar, Clock, ChevronRight 
+} from 'lucide-react';
 import Navigation from "../components/Navigation";
-
-// --- Interfaces & Types ---
-interface Track {
-  id: number;
-  title: string;
-  duration: string;
-}
-
-interface ArtistData {
-  name: string;
-  subName: string;
-  full_name: string;
-  lifespan: string;
-  albumTitle: string;
-  albumReleaseDate: string;
-  skills: string[];
-  tracks: Track[];
-}
 
 const ArtistPortfolio: React.FC = () => {
   const socialLinks = [
@@ -28,169 +13,229 @@ const ArtistPortfolio: React.FC = () => {
     { name: "SoundCloud", icon: <Music size={20} />, url: "https://soundcloud.com/two290ninety" },
   ];
 
-  const artistData: ArtistData = {
+  const artistData = {
     name: "290",
-    subName: "(M. Tuguldur)",
-    full_name: "Мөнхбаатарын Төгөлдөр",
-    lifespan: "2000.03.28 — 2025.12.04",
-    albumTitle: "Selected Works",
-    albumReleaseDate: "2024",
-    skills: ["Songwriting", "Producing", "Drawing", "Mix & Mastering"],
+    subName: "M. TUGULDUR",
+    albumTitle: "9",
+    releaseDate: "2023.09.09", // Жишээ огноо
+    duration: "27 минут",
+    producers: ["FRUITYBAACHKA", "TONY", "QUAD", "TUUG18"],
+    features: ["TUUG18", "BEKATRINA", "DVRELZ", "BPXC"],
     tracks: [
-      { id: 1, title: "Intro", duration: "1:45" },
-      { id: 2, title: "Legacy", duration: "3:12" },
-      { id: 3, title: "Midnight City", duration: "2:58" },
-      { id: 4, title: "After Hours", duration: "3:30" },
-      { id: 5, title: "Outro", duration: "2:15" },
+      { id: "01", title: "INTRO", duration: "1:45" },
+      { id: "02", title: "GUDAMJ", duration: "3:12" },
+      { id: "03", title: "40K50K220K", duration: "2:58" },
+      { id: "04", title: "BEMR", feature: "DVRELZ", duration: "3:30" },
+      { id: "05", title: "WERK", feature: "BEKATRINA", duration: "2:45" },
+      { id: "06", title: "BACHT ONNA YACHT", feature: "TUUG18", duration: "3:05" },
+      { id: "07", title: "HNDITGHV", feature: "BPXC", duration: "2:50" },
+      { id: "08", title: "THOUGHTS/TSETSEG", feature: "BPXC", duration: "3:15" },
+      { id: "09", title: "HOVORHON", duration: "3:40" },
     ],
   };
 
-  const artistImages = [
-    "https://i.pinimg.com/736x/d9/45/f8/d945f8ca49de63f3807024d4b2082d5e.jpg",
-    "https://i.pinimg.com/736x/86/9e/6a/869e6ad17e22e5932420ffc057a2de88.jpg",
-    "https://i.pinimg.com/736x/44/d5/2b/44d52bf27966502dd4c8741a43b2c297.jpg",
-    "https://i.pinimg.com/736x/18/d0/de/18d0de2df91e5df61267b0468c6c984d.jpg"
-  ];
+  const albumCover = "https://i.pinimg.com/736x/d7/53/bf/d753bfcbcadc71badf4580ccf534a27d.jpg";
 
   const fadeInUp: Variants = {
     initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    whileInView: { opacity: 1, y: 0, transition: { duration: 0.8 } }
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-gray-100 font-sans selection:bg-[#FFC107] selection:text-black overflow-x-hidden">
-      {/* Background Gradients */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#FFC107]/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FFC107]/5 rounded-full blur-[120px]" />
+    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-[#FFC107] selection:text-black overflow-x-hidden">
+      
+      {/* --- Sunflower Aesthetic Background --- */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-[#FFC107]/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#FFB300]/5 rounded-full blur-[120px]" />
+        {/* Floating Petal Effect */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30L35 45L30 60L25 45L30 30Z' fill='%23FFC107'/%3E%3C/svg%3E")` }} />
       </div>
 
       <Navigation socialLinks={socialLinks} />
 
-      <main className="max-w-6xl mx-auto px-6 py-20">
+      <main className="max-w-7xl mx-auto px-6 pt-32 pb-20">
         
-        {/* --- Hero Section --- */}
-        <section className="relative min-h-[80vh] flex flex-col items-center justify-center mb-24 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-8xl md:text-[12rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#FFC107] to-[#8A6D00] z-10"
+        {/* --- HERO: THE 290 EFFECT (FOCUSED ON '9') --- */}
+        <section className="relative h-[75vh] flex flex-col items-center justify-center mb-24">
+          {/* Rotating Sunflower Ray Effect */}
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="absolute opacity-20"
           >
-            {artistData.name}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="text-xl md:text-2xl text-gray-500 font-light tracking-[0.3em] uppercase mt-4">
-            {artistData.subName}
-          </motion.p>
-        </section>
-
-        {/* --- Album Detail Section --- */}
-        <section className="grid lg:grid-cols-2 gap-16 mb-48 items-start">
-          
-          {/* Left: Album Cover & Spotify */}
-          <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} className="space-y-8">
-            <div className="relative group aspect-square max-w-[500px] mx-auto lg:mx-0">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#FFC107] to-[#8A6D00] rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-              <img 
-                src={artistImages[2]} // Цомгийн ковер болгон ашиглав
-                alt="Album Cover" 
-                className="relative rounded-lg object-cover w-full h-full shadow-2xl"
-              />
-              <div className="absolute bottom-6 left-6 right-6 p-6 bg-black/60 backdrop-blur-md rounded-xl border border-white/10">
-                <p className="text-[#FFC107] text-xs font-mono uppercase tracking-widest mb-1">Latest Release</p>
-                <h3 className="text-2xl font-bold text-white">{artistData.albumTitle}</h3>
-              </div>
-            </div>
-
-            {/* Spotify Embed Player */}
-            <div className="w-full rounded-xl overflow-hidden bg-[#121212] border border-white/5 shadow-2xl">
-              <iframe 
-                src="https://open.spotify.com/embed/artist/06i7j2kM4C7P7Z8N2J2k" // Жишээ ID: Бодит ID-аар солино уу
-                width="100%" 
-                height="152" 
-                frameBorder="0" 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-view" 
-                loading="lazy"
-              ></iframe>
-            </div>
+            {[...Array(12)].map((_, i) => (
+              <div key={i} style={{ rotate: `${i * 30}deg` }} className="absolute w-[2px] h-[600px] bg-gradient-to-t from-transparent via-[#FFC107] to-transparent -translate-y-1/2" />
+            ))}
           </motion.div>
 
-          {/* Right: Tracklist & Info */}
-          <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} className="flex flex-col h-full">
-            <h2 className="text-4xl font-bold mb-2 text-white">Tracklist</h2>
-            <p className="text-gray-500 font-mono text-sm mb-8 uppercase tracking-widest">© {artistData.albumReleaseDate} Yasha Records</p>
-            
-            <div className="space-y-1">
-              {artistData.tracks.map((track) => (
-                <div 
-                  key={track.id} 
-                  className="group flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-all border-b border-white/5"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-gray-600 font-mono text-sm group-hover:text-[#FFC107]">{track.id.toString().padStart(2, '0')}</span>
-                    <Play size={14} className="text-[#FFC107] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-gray-300 group-hover:text-white font-medium">{track.title}</span>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <Clock size={14} className="text-gray-600" />
-                    <span className="text-gray-500 font-mono text-sm">{track.duration}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="relative z-10 text-center">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.2 }}
+              className="relative"
+            >
+              {/* Back Glow Effect */}
+              <h1 className="absolute inset-0 text-[16rem] md:text-[25rem] font-black tracking-tighter leading-none text-[#FFC107] blur-3xl opacity-20 select-none">
+                290
+              </h1>
+              {/* Main Text: highlighting the 9 for this album */}
+              <h1 className="text-[16rem] md:text-[25rem] font-black tracking-tighter leading-none relative">
+                <span className="text-white/10">2</span>
+                <span className="text-[#FFC107] drop-shadow-[0_0_30px_rgba(255,193,7,0.4)]">9</span>
+                <span className="text-white/10">0</span>
+              </h1>
+            </motion.div>
 
-            <div className="mt-12 p-8 border border-[#FFC107]/20 rounded-2xl bg-[#FFC107]/5 backdrop-blur-sm">
-              <h4 className="text-[#FFC107] font-bold uppercase tracking-widest text-xs mb-4">Artist Note</h4>
-              <p className="text-gray-400 italic leading-relaxed">
-                "{artistData.full_name} нь өөрийн хөгжмийн найруулгадаа амьдралын үнэ цэнэ, цаг хугацааны мөн чанарыг шингээхийг зорьдог байв."
+            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="flex flex-col items-center gap-2">
+              <p className="text-sm md:text-xl font-bold tracking-[1.5em] text-[#FFC107] uppercase ml-[1.5em]">
+                {artistData.subName}
               </p>
-            </div>
-          </motion.div>
+              <div className="flex items-center gap-4 mt-6">
+                <Sun className="text-[#FFC107] animate-pulse" size={20} />
+                <span className="h-[1px] w-20 bg-white/20" />
+                <span className="text-[10px] font-black tracking-[0.5em] text-gray-500 uppercase">SYSTEM NINE ARCHIVE</span>
+                <span className="h-[1px] w-20 bg-white/20" />
+                <Sun className="text-[#FFC107] animate-pulse" size={20} />
+              </div>
+            </motion.div>
+          </div>
         </section>
 
-        {/* Biography Section */}
-        <motion.section 
-          variants={fadeInUp} 
-          initial="initial" 
-          whileInView="whileInView" 
-          viewport={{ once: true }}
-          className="mb-32"
-        >
-          <div className="bg-[#0F0F0F] border border-white/5 p-12 rounded-3xl relative overflow-hidden">
-             <div className="relative z-10 grid md:grid-cols-3 gap-12 items-center">
-                <div className="md:col-span-2">
-                   <h2 className="text-xs uppercase tracking-[0.5em] text-[#FFC107] font-bold mb-6">The Legacy</h2>
-                   <p className="text-2xl text-gray-300 leading-snug font-light mb-8">
-                     Мөнхбаатарын Төгөлдөр: Хөгжимчин, Продюсер, Уран бүтээлч. 
-                     Түүний үлдээсэн хөгжмийн ертөнцөөр аялаарай.
-                   </p>
-                   <div className="flex gap-2 flex-wrap">
-                    {artistData.skills.map((skill) => (
-                      <span key={skill} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-gray-400">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+        {/* --- ALBUM COVER & TRACKLIST --- */}
+        <section className="grid lg:grid-cols-12 gap-16 items-start mb-40">
+           
+           {/* Left: Album Cover */}
+           <motion.div 
+            variants={fadeInUp} 
+            initial="initial" 
+            whileInView="whileInView" 
+            className="lg:col-span-5 lg:sticky lg:top-32 group"
+          >
+              <div className="absolute -inset-6 bg-[#FFC107]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+                <img src={albumCover} alt="Album 9" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-10 left-10">
+                   <p className="text-[#FFC107] font-mono text-xs tracking-[0.4em] mb-4">GOLDEN COLLECTION</p>
+                   <h2 className="text-8xl font-black italic tracking-tighter uppercase">"{artistData.albumTitle}"</h2>
+                   <div className="flex gap-8 mt-6">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400"><Calendar size={14} className="text-[#FFC107]"/> {artistData.releaseDate}</div>
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400"><Clock size={14} className="text-[#FFC107]"/> {artistData.duration}</div>
+                   </div>
                 </div>
-                <div className="text-right">
-                   <a 
-                    href="https://open.spotify.com/artist/06i7j2kM4C7P7Z8N2J2k" 
-                    target="_blank"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-[#FFC107] text-black font-bold rounded-full hover:scale-105 transition-transform"
-                   >
-                     LISTEN ON SPOTIFY <ExternalLink size={18} />
-                   </a>
-                </div>
-             </div>
-          </div>
-        </motion.section>
+              </div>
+           </motion.div>
 
-        {/* Footer */}
-        <footer className="pt-24 border-t border-white/5 text-center">
-          <p className="text-[10px] uppercase tracking-[0.6em] text-gray-700">
-            {artistData.name} Legacy • {artistData.lifespan}
-          </p>
+           {/* Right: Premium Tracklist */}
+           <motion.div 
+            variants={fadeInUp} 
+            initial="initial" 
+            whileInView="whileInView" 
+            className="lg:col-span-7 space-y-4"
+          >
+              <div className="flex items-center gap-4 mb-10 border-b border-white/10 pb-6">
+                <Disc className="text-[#FFC107] animate-spin-slow" />
+                <h3 className="text-2xl font-bold tracking-widest uppercase italic">Tracklist</h3>
+              </div>
+
+              <div className="space-y-1">
+                {artistData.tracks.map((track) => (
+                  <motion.div 
+                    key={track.id}
+                    whileHover={{ x: 10 }}
+                    className="group flex items-center justify-between p-5 rounded-2xl hover:bg-[#FFC107]/5 border-b border-white/5 transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-6">
+                      <span className="font-mono text-xs text-gray-600 group-hover:text-[#FFC107] transition-colors">
+                        {track.id}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <h4 className="text-lg font-bold uppercase tracking-tight group-hover:text-white text-gray-300">
+                            {track.title}
+                          </h4>
+                          {track.feature && <Star size={10} className="fill-[#FFC107] text-[#FFC107] opacity-40" />}
+                        </div>
+                        {track.feature && (
+                          <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">
+                            ft. {track.feature}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-5">
+                      <span className="text-[11px] font-mono text-gray-600">{track.duration}</span>
+                      <Play size={14} className="text-[#FFC107] opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+           </motion.div>
+        </section>
+
+        {/* --- INFO CARDS: COLLABORATION & PRODUCTION --- */}
+        <section className="grid md:grid-cols-2 gap-8 mb-40">
+           <motion.div 
+            variants={fadeInUp} initial="initial" whileInView="whileInView"
+            className="p-12 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl relative overflow-hidden group"
+          >
+              <Users className="text-[#FFC107] mb-8" size={32} />
+              <h3 className="text-xs font-black tracking-[0.4em] uppercase text-[#FFC107] mb-8">FEATURED BY:</h3>
+              <div className="flex flex-wrap gap-3">
+                {artistData.features.map(f => (
+                  <span key={f} className="px-5 py-2.5 bg-white/5 rounded-full text-xs font-bold border border-white/10 group-hover:border-[#FFC107]/30 transition-all hover:bg-[#FFC107] hover:text-black">
+                    {f}
+                  </span>
+                ))}
+              </div>
+              <div className="absolute top-0 right-0 -mr-12 -mt-12 w-40 h-40 bg-[#FFC107]/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+           </motion.div>
+
+           <motion.div 
+            variants={fadeInUp} initial="initial" whileInView="whileInView"
+            className="p-12 rounded-[2.5rem] bg-[#FFC107]/5 border border-[#FFC107]/20 backdrop-blur-xl relative overflow-hidden group"
+          >
+              <Star className="text-[#FFC107] mb-8" size={32} />
+              <h3 className="text-xs font-black tracking-[0.4em] uppercase text-[#FFC107] mb-8">PRODUCED BY</h3>
+              <div className="flex flex-wrap gap-3">
+                {artistData.producers.map(p => (
+                  <span key={p} className="px-5 py-2.5 bg-black/40 rounded-full text-xs font-bold border border-[#FFC107]/20 group-hover:bg-[#FFC107] group-hover:text-black transition-all">
+                    {p}
+                  </span>
+                ))}
+              </div>
+           </motion.div>
+        </section>
+
+        {/* --- FOOTER --- */}
+        <footer className="text-center py-20 relative border-t border-white/5">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+            <h2 className="text-6xl font-black italic tracking-tighter text-white opacity-20 mb-4 hover:opacity-100 transition-opacity duration-700">
+              {artistData.name}
+            </h2>
+            <p className="text-[10px] font-bold tracking-[1.2em] text-gray-600 uppercase ml-[1.2em]">
+              TWOGO • 290 
+            </p>
+          </motion.div>
         </footer>
+
       </main>
+
+      <style jsx global>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        ::selection {
+          background: #FFC107;
+          color: #000;
+        }
+      `}</style>
     </div>
   );
 };

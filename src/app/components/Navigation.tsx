@@ -2,12 +2,11 @@ import React from 'react';
 import { Sun, ChevronDown } from 'lucide-react';
 
 const categories = [
-  "tuguldur",
-  "documentary",
   "290",
+  "digital-archive",
   "album0",
-  "merch",
-  "album9"
+  "album9",
+  "merch"
 ];
 
 interface SocialLink {

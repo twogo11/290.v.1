@@ -20,7 +20,7 @@ const DocumentaryPage: React.FC = () => {
     name: "290",
     subName: "(M. Tuguldur)",
     full_name: "Мөнхбаатарын Төгөлдөр",
-    lifespan: "2000.03.28 — 2025.12.04",
+    
   };
 
   const archiveVideos: VideoEntry[] = [
@@ -31,10 +31,40 @@ const DocumentaryPage: React.FC = () => {
       description: "Уран бүтээлч 290-ийн үзэл бодол, дотоод ертөнцийн тухай гүнзгий ярилцлага.",
     },
     {
-      title: "Анхны Подкаст",
-      type: "Podcast",
+      title: "290 | UTV PODCAST",
+      type: "U brand",
+      url: "https://youtu.be/xBNx1kU25AQ?si=6-uzyUZJknQpO-4v",
+      description: "Heey, та бүхний хамгийн их асуусан хүсэн хүлээсэн дугаараа хүлээн авна уу 💚 Хөөрхөн хөтлөгч Анхилуун маань артист 290 найзтайгаа нээлттэй яриа өрнүүллээ тухлан сууж сонсоорой ✨",
+    },
+    {
+      title: "Анхны Подкаст 290 | Zolo Show",
+      type: "Zolo",
       url: "https://youtu.be/g9vAg05KNTk",
       description: "Хөгжмийн замналын эхлэл ба Yasha багийн тухай хуваалцсан түүх.",
+    },
+    {
+      title: "БӨӨЕЭНХИЙ ЯРИА",
+      type: "KAIZENEO",
+      url: "https://youtu.be/0oGeVwbpmSQ?si=8WUqNpIPg11X4Aap",
+      description: "Уран бүтээлч 290-ийн үзэл бодол, дотоод ертөнцийн тухай гүнзгий ярилцлага.",
+    },
+    {
+      title: " ХАМГИЙН 2 | ХЭДЭН ХУТГА АСУУЛТ | 290",
+      type: "VolumePlusTV",
+      url: "https://youtu.be/a7KQYw1W7i0?si=Zhfmh0Nucrv49vHM",
+      description: "Уран бүтээлч 290-ийн үзэл бодол, дотоод ертөнцийн тухай гүнзгий ярилцлага.",
+    },
+    {
+      title: "290 - be my summer (ft. Chill with Yavuuhulan) | LyricSutra",
+      type: "Blaze Entertainment",
+      url: "https://youtu.be/H3kIpPCeYTE?si=a56T3p8-EQbA3Vhn",
+      description: "Уран бүтээлч 290-ийн үзэл бодол, дотоод ертөнцийн тухай гүнзгий ярилцлага.",
+    },
+    {
+      title: "Дууны үгийг учирлая | 290, Twoninety",
+      type: "KAIZENEO",
+      url: "https://youtu.be/V_ZteucRElU?si=NGXb2HPBCijrEU8N",
+      description: "Уран бүтээлч 290-ийн үзэл бодол, дотоод ертөнцийн тухай гүнзгий ярилцлага.",
     },
     {
       title: "Triple X Music Festival 2024",
@@ -79,7 +109,7 @@ const DocumentaryPage: React.FC = () => {
             </div>
             <div className="text-right">
               <span className="text-xs font-mono text-[#FFC107]/60 block mb-1 uppercase tracking-widest">Digital Archive</span>
-              <span className="text-xl font-light text-gray-400">{artistData.lifespan}</span>
+              
             </div>
           </div>
         </motion.div>
@@ -182,7 +212,7 @@ const DocumentaryPage: React.FC = () => {
           <Mail className="text-gray-600 hover:text-[#FFC107] cursor-pointer transition-colors" />
         </div>
         <p className="text-[10px] uppercase tracking-[0.5em] text-gray-700">
-          290 Legacy Digital Experience © 2024
+          TWOGO • 2026
         </p>
       </footer>
 

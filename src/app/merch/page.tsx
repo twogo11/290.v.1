@@ -144,7 +144,7 @@ const DirectSunflowerStore: React.FC = () => {
             ))}
           </div>
           <p className="text-[9px] uppercase tracking-[0.8em] text-gray-700">
-            🌻 290 Legacy • Conceptualized for M.Tuguldur
+            TWOGO • 2026
           </p>
         </footer>
       </main>

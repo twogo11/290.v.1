@@ -1,7 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Play, Disc, Clock, Info, Calendar, History, Video, Music } from "lucide-react";
+import React from 'react';
+import { motion, Variants } from 'framer-motion';
+import { 
+  Play, Disc, Clock, Info, Calendar, History, 
+  Video, Music, Star, Sun, ExternalLink, Hash, ChevronRight
+} from 'lucide-react';
 import Navigation from "../components/Navigation";
 
 interface TrackEntry {
@@ -13,8 +16,6 @@ interface TrackEntry {
 }
 
 const AlbumZeroPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'tracklist' | 'story'>('tracklist');
-
   const albumInfo = {
     title: "0",
     artist: "290",
@@ -22,11 +23,9 @@ const AlbumZeroPage: React.FC = () => {
     totalTracks: 29,
     duration: "1 цаг 18 минут",
     coverUrl: "https://i.scdn.co/image/ab67616d00001e02bf9b21282ede6b0e262088d7",
-    spotifyUrl: "https://open.spotify.com/album/1zBqxBBPrAIzXUkgDkB0Th?si=IkC9AkWLRmynXU-8I3K25w",
-    // Нэмэлт мэдээллүүд
-    meaning: "Нэрний утга нь гэвэл 29 дуутай 'О' гэдэг нэртэй цомог. Ер нь бол дууны тоо + цомгийн нэр = 290",
-    coverStory: "Ковер зургийн түүх... Энэ зураг нь зөгийн бал , талх шиг харагдаж байгаа ч өөрөө цомгийн нэр буюу '0'-ийн тоо юм. 290 энэ зургийг iPhone утасныхаа камераар авсан. Зургийг сайн харвал подволоос авсан бөгөөд цаана нь мод харагдана.",
-    process: "Цомгийг 290 анх дуу хийж эхэлсэн цагаасаа хойш цомог хийх тал дээр ажиллаад л яваад байсан. 2020 онд 'Титэмгүй Хаан' гэдэг цомог гаргах гэж байсан ч тэр үед гаргаагүй. 2023 онд харин тэр цомогт байсан дуунууд дээр шинэ дуунууд нэмэгдээд, нийт 29 дуутай '0' цомог гаргасан."
+    meaning: "29 дуутай '0' гэдэг нэртэй цомог. Ер нь бол дууны тоо + цомгийн нэр = 290",
+    coverStory: "Зураг нь зөгийн бал, талх шиг харагдаж байгаа ч өөрөө цомгийн нэр буюу '0'-ийн тоо юм. 290 энэ зургийг iPhone-оороо подволоос авсан.",
+    process: "2020 онд 'Титэмгүй Хаан' нэртэй гарах байсан ч 2023 онд шинэ дуунууд нэмэгдэн нийт 29 дуутай '0' цомог болж мэндэлсэн."
   };
 
   const allTracks: TrackEntry[] = [
@@ -61,157 +60,172 @@ const AlbumZeroPage: React.FC = () => {
     { id: "29", title: "Ballad", artist: "290", duration: "2:19" },
   ];
 
+  const fadeInUp: Variants = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
   return (
-    <div className="min-h-screen bg-[#070707] text-white font-sans selection:bg-[#FFD700] selection:text-black">
+    <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-[#FFC107] selection:text-black overflow-x-hidden">
+      
+      {/* --- Sunflower Aesthetic Background --- */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-[#FFC107]/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#FFB300]/5 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30L35 45L30 60L25 45L30 30Z' fill='%23FFC107'/%3E%3C/svg%3E")` }} />
+      </div>
+
       <Navigation socialLinks={[]} />
 
-      {/* HEADER SECTION - SUNFLOWER DESIGN */}
-      <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12 items-center lg:items-end">
-          {/* Cover Art with Golden Glow */}
+      <main className="max-w-7xl mx-auto px-6 pt-32 pb-20">
+        
+        {/* --- HERO: THE 290 EFFECT --- */}
+        <section className="relative h-[70vh] flex flex-col items-center justify-center mb-32">
+          {/* Rotating Sunflower Ray Effect */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative group w-72 h-72 md:w-96 md:h-96 flex-shrink-0"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="absolute opacity-20"
           >
-            <div className="absolute -inset-1 bg-[#FFD700] rounded-sm blur opacity-25 group-hover:opacity-50 transition duration-700"></div>
-            <img 
-              src={albumInfo.coverUrl} 
-              alt="Album 0" 
-              className="relative w-full h-full object-cover border border-[#FFD700]/20 shadow-2xl" 
-            />
+            {[...Array(12)].map((_, i) => (
+              <div key={i} style={{ rotate: `${i * 30}deg` }} className="absolute w-[2px] h-[600px] bg-gradient-to-t from-transparent via-[#FFC107] to-transparent -translate-y-1/2" />
+            ))}
           </motion.div>
 
-          <div className="flex-1">
+          <div className="relative z-10 text-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.2 }}
+              className="relative"
             >
-              <p className="text-[#FFD700] text-xs font-black uppercase tracking-[0.4em] mb-4">Official Album</p>
-              <h1 className="text-9xl md:text-[14rem] font-black leading-[0.8] mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#FFD700] to-[#8B7500]">
-                {albumInfo.title}
+              {/* Back Glow Effect */}
+              <h1 className="absolute inset-0 text-[16rem] md:text-[25rem] font-black tracking-tighter leading-none text-[#FFC107] blur-3xl opacity-20 select-none">
+                290
               </h1>
-              
-              <div className="flex flex-wrap items-center gap-6 text-xs font-bold uppercase tracking-widest text-gray-400">
-                <span className="flex items-center gap-2 text-[#FFD700]">
-                  <Calendar size={14} /> {albumInfo.releaseDate}
-                </span>
-                <span className="flex items-center gap-2">
-                  <Clock size={14} /> {albumInfo.duration}
-                </span>
-                <span className="flex items-center gap-2">
-                  <Music size={14} /> {albumInfo.totalTracks} Songs
-                </span>
+              {/* Main Text */}
+              <h1 className="text-[16rem] md:text-[25rem] font-black tracking-tighter leading-none relative">
+                <span className="text-white/10">29</span>
+                <span className="text-[#FFC107] drop-shadow-[0_0_30px_rgba(255,193,7,0.3)]">0</span>
+              </h1>
+            </motion.div>
+
+            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="flex flex-col items-center gap-2">
+              <p className="text-sm md:text-xl font-bold tracking-[1.5em] text-[#FFC107] uppercase ml-[1.5em]">
+                {albumInfo.artist}
+              </p>
+              <div className="flex items-center gap-4 mt-4">
+                <Sun className="text-[#FFC107] animate-pulse" size={20} />
+                <span className="h-[1px] w-20 bg-white/20" />
+                <span className="text-[10px] font-black tracking-[0.5em] text-gray-500 uppercase">Archive No. 000</span>
+                <span className="h-[1px] w-20 bg-white/20" />
+                <Sun className="text-[#FFC107] animate-pulse" size={20} />
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* INFO CARDS SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#111111] p-6 border-t-2 border-[#FFD700] hover:bg-[#161616] transition-colors">
-            <div className="flex items-center gap-3 mb-4 text-[#FFD700]">
-              <Info size={18} />
-              <h3 className="text-xs font-black uppercase tracking-widest">album name meaning</h3>
+        {/* --- ALBUM COVER & QUICK INFO --- */}
+        <section className="grid lg:grid-cols-2 gap-20 items-center mb-40">
+           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="relative group">
+              <div className="absolute -inset-6 bg-[#FFC107]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+                <img src={albumInfo.coverUrl} alt="Album 0" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                   <h2 className="text-8xl font-black italic tracking-tighter">"{albumInfo.title}"</h2>
+                   <div className="flex gap-6 mt-4">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-[#FFC107]"><Calendar size={14}/> {albumInfo.releaseDate}</div>
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-[#FFC107]"><Clock size={14}/> {albumInfo.duration}</div>
+                   </div>
+                </div>
+              </div>
+           </motion.div>
+
+           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="space-y-12">
+              <div>
+                <h3 className="text-xs font-black tracking-[0.4em] text-[#FFC107] uppercase mb-4">The Meaning</h3>
+                <p className="text-2xl font-light leading-relaxed text-gray-300 italic">"{albumInfo.meaning}"</p>
+              </div>
+              <div className="grid grid-cols-2 gap-8">
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                  <Video className="text-[#FFC107] mb-4" size={20} />
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Cover Story</h4>
+                  <p className="text-xs leading-relaxed text-gray-400">{albumInfo.coverStory}</p>
+                </div>
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                  <History className="text-[#FFC107] mb-4" size={20} />
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">The Process</h4>
+                  <p className="text-xs leading-relaxed text-gray-400">{albumInfo.process}</p>
+                </div>
+              </div>
+           </motion.div>
+        </section>
+
+        {/* --- TRACKLIST REDESIGN: 2 COLUMNS GRID --- */}
+        <section className="mb-40">
+          <div className="flex items-end justify-between mb-12 border-b border-white/10 pb-8">
+            <div>
+              <h3 className="text-4xl font-black tracking-tighter uppercase italic">Tracklist</h3>
+              <p className="text-[#FFC107] text-xs font-bold tracking-[0.3em] uppercase mt-2">290</p>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">{albumInfo.meaning}</p>
+            <div className="text-right">
+              <span className="text-5xl font-black text-white/10 uppercase">Vol. 0</span>
+            </div>
           </div>
 
-          <div className="bg-[#111111] p-6 border-t-2 border-[#FFD700] hover:bg-[#161616] transition-colors">
-            <div className="flex items-center gap-3 mb-4 text-[#FFD700]">
-              <Video size={18} />
-              <h3 className="text-xs font-black uppercase tracking-widest">album cover</h3>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed">{albumInfo.coverStory}</p>
-          </div>
-
-          <div className="bg-[#111111] p-6 border-t-2 border-[#FFD700] hover:bg-[#161616] transition-colors">
-            <div className="flex items-center gap-3 mb-4 text-[#FFD700]">
-              <History size={18} />
-              <h3 className="text-xs font-black uppercase tracking-widest">Timeline</h3>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed">{albumInfo.process}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* TABS & TRACKLIST */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="flex gap-12 mb-12 border-b border-white/5">
-          <button 
-            onClick={() => setActiveTab('tracklist')}
-            className={`pb-4 text-xs font-black uppercase tracking-[0.3em] transition-all ${activeTab === 'tracklist' ? "text-[#FFD700] border-b-2 border-[#FFD700]" : "text-gray-500 hover:text-white"}`}
-          >
-            Tracklist
-          </button>
-          <button 
-            onClick={() => setActiveTab('story')}
-            className={`pb-4 text-xs font-black uppercase tracking-[0.3em] transition-all ${activeTab === 'story' ? "text-[#FFD700] border-b-2 border-[#FFD700]" : "text-gray-500 hover:text-white"}`}
-          >
-            Full Credits
-          </button>
-        </div>
-
-        {activeTab === 'tracklist' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-2">
             {allTracks.map((track) => (
               <motion.div 
+                key={track.id}
                 whileHover={{ x: 10 }}
-                key={track.id} 
-                className="flex items-center justify-between py-4 border-b border-white/5 group"
+                className="group flex items-center justify-between py-4 border-b border-white/5 hover:border-[#FFC107]/30 transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-6">
-                  <span className="text-[10px] font-mono text-[#FFD700] opacity-40 group-hover:opacity-100">{track.id}</span>
+                  <span className="font-mono text-[10px] text-gray-600 group-hover:text-[#FFC107] transition-colors">{track.id}</span>
                   <div>
-                    <h4 className={`text-sm font-bold tracking-tight ${track.isPopular ? 'text-[#FFD700]' : 'text-gray-200'}`}>
-                      {track.title}
-                    </h4>
-                    <p className="text-[10px] text-gray-600 uppercase mt-0.5">{track.artist}</p>
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-base font-bold uppercase tracking-tight group-hover:text-white text-gray-300">
+                        {track.title}
+                      </h4>
+                      {track.isPopular && <Star size={10} className="fill-[#FFC107] text-[#FFC107]" />}
+                    </div>
+                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">{track.artist}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-mono text-gray-500">{track.duration}</span>
-                  {track.isPopular && <div className="w-1 h-1 rounded-full bg-[#FFD700]" />}
+                <div className="flex items-center gap-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] font-mono">{track.duration}</span>
+                  <Play size={12} className="text-[#FFC107]" />
                 </div>
               </motion.div>
             ))}
           </div>
-        ) : (
-          <div className="max-w-3xl space-y-12">
-            <div className="prose prose-invert">
-              <h2 className="text-3xl font-black text-[#FFD700] mb-6">290 RECORDS Archive</h2>
-              <p className="text-gray-400 leading-8 italic">
-                "Энэ цомог бол миний хувьд зүгээр нэг дуунуудын цуглуулга биш, харин сүүлийн 2 жилийн амьдралын минь тэмдэглэл. 
-                Бид '0' цэгээс эхэлсэн, харин одоо энэ бүхэн таны чихэнд хүрч байна."
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-8 py-8 border-y border-white/5 font-mono text-[10px] uppercase tracking-widest text-gray-500">
-              <div>
-                <p className="text-[#FFD700] mb-2">Produced by</p>
-                <p>290, Various Artists</p>
-              </div>
-              <div>
-                <p className="text-[#FFD700] mb-2">Mixed & Mastered</p>
-                <p>290 RECORDS Studio</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
+        </section>
 
-      {/* FOOTER */}
-      <footer className="py-20 bg-[#050505] border-t border-[#FFD700]/10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center opacity-40 hover:opacity-100 transition-opacity">
-          <div className="text-[9px] uppercase tracking-[0.6em] font-mono">
-            © 2023 290 RECORDS // SYSTEM ZERO
-          </div>
-          <a href={albumInfo.spotifyUrl} className="mt-6 md:mt-0 p-4 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black transition-all">
-            <Play fill="currentColor" size={16} />
-          </a>
-        </div>
-      </footer>
+        {/* --- FOOTER --- */}
+        <footer className="text-center py-20 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gradient-to-r from-transparent via-[#FFC107] to-transparent" />
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
+            <h2 className="text-7xl font-black italic tracking-tighter text-white opacity-20 mb-4 hover:opacity-100 transition-opacity duration-700">
+              {albumInfo.artist}
+            </h2>
+            <p className="text-[10px] font-bold tracking-[1.2em] text-gray-600 uppercase ml-[1.2em]">
+              TWOGO • 2026
+            </p>
+          </motion.div>
+        </footer>
+
+      </main>
+
+      <style jsx global>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };

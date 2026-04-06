@@ -75,24 +75,7 @@ export default function ArtistPage() {
               priority
             />
 
-            {/* Decorative Sunflower Images from Pinterest */}
-            <div className="absolute left-[-5%] top-[15%] w-[350px] h-[350px] opacity-15 rotate-[-15deg] mix-blend-screen hidden lg:block">
-              <Image
-                src="https://i.pinimg.com/736x/4c/5c/2d/4c5c2d5e798eae5a7d7ff9e121f7a780.jpg"
-                alt="flower-sketch"
-                fill
-                className="object-cover opacity-15 rotate-[-15deg] mix-blend-screen hidden lg:block"
-              />
-            </div>
-
-            <div className="absolute right-[-8%] bottom-[5%] w-[450px] h-[450px] opacity-25 rotate-[20deg] mix-blend-lighten hidden lg:block">
-              <Image
-                src="https://i.pinimg.com/736x/4c/5c/2d/4c5c2d5e798eae5a7d7ff9e121f7a780.jpg"
-                alt="flower-golden"
-                fill
-                className="object-cover opacity-25 rotate-[20deg] mix-blend-lighten hidden lg:block"
-              />
-            </div>
+            
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/50" />
           </div>
@@ -154,6 +137,10 @@ export default function ArtistPage() {
                 брэндүүдийг үүсгэн байгуулж, залуусын соёл, загварын чиг
                 хандлагад өөрийн гэсэн тод, дулаахан мөрийг үлдээсэн юм.
               </p>
+
+
+
+              
               <div className="relative p-8 border-l-4 border-amber-600 bg-amber-950/10 rounded-r-2xl italic group hover:bg-amber-900/20 transition-all">
                 <p className="text-amber-100/90 text-lg">
                   "Би их сургуульдаа 6 жилийг өнгөрөөсөн, учир нь 2 жил сураад,

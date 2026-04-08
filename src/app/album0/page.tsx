@@ -114,7 +114,7 @@ const AlbumZeroPage: React.FC = () => {
               <div className="flex items-center gap-3 md:gap-4 mt-6 md:mt-4">
                 <Sun className="text-[#FFC107] animate-pulse" size={16} />
                 <span className="h-[1px] w-12 md:w-20 bg-white/20" />
-                <span className="text-[8px] md:text-[10px] font-black tracking-[0.3em] md:tracking-[0.5em] text-gray-500 uppercase">Archive No. 000</span>
+                <span className="text-[8px] md:text-[10px] font-black tracking-[0.3em] md:tracking-[0.5em] text-gray-500 uppercase">album 0</span>
                 <span className="h-[1px] w-12 md:w-20 bg-white/20" />
                 <Sun className="text-[#FFC107] animate-pulse" size={16} />
               </div>

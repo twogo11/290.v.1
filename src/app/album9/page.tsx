@@ -15,7 +15,7 @@ const ArtistPortfolio: React.FC = () => {
 
   const artistData = {
     name: "290",
-    subName: "M. TUGULDUR",
+    subName: "290",
   
     releaseDate: "2023.09.09",
     duration: "27 минут",
@@ -89,11 +89,11 @@ const ArtistPortfolio: React.FC = () => {
                 {artistData.subName}
               </p>
               <div className="flex items-center gap-2 lg:gap-4 mt-4 lg:mt-6">
-                <Sun className="text-[#FFC107] animate-pulse hidden sm:block" size={20} />
-                <span className="h-[1px] w-10 lg:w-20 bg-white/20" />
-                <span className="text-[8px] lg:text-[10px] font-black tracking-[0.3em] lg:tracking-[0.5em] text-gray-500 uppercase">SYSTEM NINE ARCHIVE</span>
-                <span className="h-[1px] w-10 lg:w-20 bg-white/20" />
-                <Sun className="text-[#FFC107] animate-pulse hidden sm:block" size={20} />
+                <Sun className="text-[#FFC107] animate-pulse" size={16} />
+                                <span className="h-[1px] w-12 md:w-20 bg-white/20" />
+                                <span className="text-[8px] md:text-[10px] font-black tracking-[0.3em] md:tracking-[0.5em] text-gray-500 uppercase">album 9</span>
+                                <span className="h-[1px] w-12 md:w-20 bg-white/20" />
+                                <Sun className="text-[#FFC107] animate-pulse" size={16} />
               </div>
             </motion.div>
           </div>

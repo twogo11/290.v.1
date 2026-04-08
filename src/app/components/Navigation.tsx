@@ -9,7 +9,8 @@ const categories = [
   "digital-archive",
   "album0",
   "album9",
-  "merch"
+  "merch",
+  "game290"
 ];
 
 interface SocialLink {

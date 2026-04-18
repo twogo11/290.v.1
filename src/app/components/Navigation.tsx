@@ -10,7 +10,7 @@ const categories = [
   "album0",
   "album9",
   "merch",
-  "game290"
+  "game"
 ];
 
 interface SocialLink {

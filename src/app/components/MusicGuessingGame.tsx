@@ -283,22 +283,23 @@ export default function MusicGuessingGame() {
           {gameState === "setup" && (
             <div className="p-10 text-center">
               <Music className="w-16 h-16 mx-auto mb-6 text-[#FFC107]" />
-              <h1 className="text-3xl font-black mb-2 italic">BEAT GUESSER</h1>
-              <p className="text-gray-400 mb-8">Choose your difficulty to start</p>
+              <h1 className="text-3xl font-black mb-2 italic">Аяийг таа</h1>
+              <p className="text-gray-400 mb-8">5 секунд яваад дуу зогсоно. Харин та ямар дуу болохыг таах ёстой. Нийт 10 дуу байгаа. Дуу явж дууссаны дараа 15 секунд явж эхэлнэ, тэр хугацаанд дуугаа таах ёстой. Хурдан таах тусам их оноо авна. Streak байгаа — алдахгүй явбал онооны нэмэгдэл авна.
+</p>
               <div className="grid grid-cols-2 gap-4">
                 <button 
                   onClick={() => initGame(5000)}
                   className="p-6 bg-[#FFC107] text-black rounded-2xl font-bold hover:scale-105 transition-transform"
                 >
                   <span className="text-2xl block">5s</span>
-                  Normal
+                  энгийн
                 </button>
                 <button 
                   onClick={() => initGame(3000)}
                   className="p-6 bg-black border-2 border-[#FFC107] text-[#FFC107] rounded-2xl font-bold hover:scale-105 transition-transform"
                 >
                   <span className="text-2xl block">3s</span>
-                  Expert
+                  хэцүү
                 </button>
               </div>
             </div>
@@ -433,7 +434,7 @@ export default function MusicGuessingGame() {
         </div>
         
         <p className="text-center mt-8 text-gray-600 text-xs tracking-widest uppercase">
-          Powered by Deezer API • 10 Rounds • Error Handled
+         DEV BY TWOGO
         </p>
       </div>
     </div>

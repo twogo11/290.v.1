@@ -68,7 +68,7 @@ export default function ArtistPage() {
         <section className="relative h-[100vh] flex flex-col justify-center items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://i.pinimg.com/736x/4c/5c/2d/4c5c2d5e798eae5a7d7ff9e121f7a780.jpg"
+              src="https://res.cloudinary.com/do7jyitxi/image/upload/q_auto/f_auto/v1778078323/Generated_Image_May_06_2026_-_10_37PM_loeaw1.png"
               alt="290 Legacy"
               fill
               className="object-cover opacity-40 grayscale-[30%] brightness-[0.6]"

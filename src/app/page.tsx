@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Globe,
   Music,
@@ -36,6 +35,8 @@ export default function ArtistPage() {
     "Cuz of i luv u",
   ];
 
+  const videoUrl = "https://res.cloudinary.com/do7jyitxi/video/upload/q_auto/f_auto/v1778255999/lv_0_20260508235921_fphr4m.mp4";
+
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-400 font-sans selection:bg-amber-500 selection:text-black overflow-x-hidden">
       {/* Наранцэцгийн тоос мэт хөвөх эффект (Particles) */}
@@ -64,19 +65,22 @@ export default function ArtistPage() {
       <Navigation socialLinks={socialLinks} />
 
       <main className="relative z-10">
-        {/* Hero Section */}
+        {/* Hero Section - VIDEO BACKGROUND */}
         <section className="relative h-[100vh] flex flex-col justify-center items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <Image
-              src="https://res.cloudinary.com/do7jyitxi/image/upload/q_auto/f_auto/v1778078323/Generated_Image_May_06_2026_-_10_37PM_loeaw1.png"
-              alt="290 Legacy"
-              fill
-              className="object-cover opacity-40 grayscale-[30%] brightness-[0.6]"
-              priority
-            />
+            {/* Шинэчлэгдсэн Video хэсэг */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale-[30%] brightness-[0.6]"
+            >
+              <source src={videoUrl} type="video/mp4" />
+              Таны вэб хөтөч видеог дэмжихгүй байна.
+            </video>
 
-            
-
+            {/* Gradient Overlay - Текстийг тод харагдуулахын тулд */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/50" />
           </div>
 
@@ -84,7 +88,7 @@ export default function ArtistPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/5 text-amber-500 text-[10px] uppercase tracking-[0.4em] animate-fade-in">
               <Sparkles size={12} /> наранцэцэг
             </div>
-            <h1 className="text-[13vw] leading-none font-black text-white tracking-tighter uppercase drop-shadow-2xl text-amber-500/50 bg-black bg-clip-text">
+            <h1 className="text-[13vw] leading-none font-black text-white tracking-tighter uppercase drop-shadow-2xl">
               TWO{" "}
               <span className="text-amber-500 drop-shadow-[0_0_30px_rgba(245,158,11,0.3)]">
                 NINETY
@@ -106,7 +110,6 @@ export default function ArtistPage() {
 
         {/* Content Section */}
         <section className="grid md:grid-cols-12 gap-16 p-8 md:p-32 bg-[#050505] relative overflow-hidden">
-          {/* Background Sunflower Pattern (Subtle) */}
           <div className="absolute top-0 right-0 w-full h-full opacity-[0.02] pointer-events-none scale-150 rotate-45">
             <Sun size={800} />
           </div>
@@ -118,7 +121,7 @@ export default function ArtistPage() {
               </h2>
               <h3 className="text-white text-5xl md:text-7xl font-light leading-tight tracking-tight">
                 Монголын хип хоп <br />
-                ертөнцийн{" "}
+                ертөнцөд{" "}
                 <span className="italic font-serif text-amber-500">
                   наранцэцэг.
                 </span>
@@ -138,9 +141,6 @@ export default function ArtistPage() {
                 хандлагад өөрийн гэсэн тод, дулаахан мөрийг үлдээсэн юм.
               </p>
 
-
-
-              
               <div className="relative p-8 border-l-4 border-amber-600 bg-amber-950/10 rounded-r-2xl italic group hover:bg-amber-900/20 transition-all">
                 <p className="text-amber-100/90 text-lg">
                   "Би их сургуульдаа 6 жилийг өнгөрөөсөн, учир нь 2 жил сураад,
@@ -232,14 +232,6 @@ export default function ArtistPage() {
 
       {/* Animations */}
       <style jsx global>{`
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
         @keyframes float {
           0%,
           100% {
@@ -266,9 +258,6 @@ export default function ArtistPage() {
             opacity: 0.2;
             transform: scale(1.1);
           }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 12s linear infinite;
         }
         .animate-float {
           animation: float linear infinite;

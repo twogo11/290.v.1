@@ -1,32 +1,17 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, Globe, ShoppingBag, Sun } from 'lucide-react';
+import { ShoppingBag, Sun } from 'lucide-react';
 import Navigation from "../components/Navigation";
+import SocialIconLinks from "../components/SocialIconLinks";
+import { products } from "../../constants/products";
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: string;
-  image: string;
-}
+const CATEGORIES = ['All', 'clothes', 'Accessories', 'Jewelry', 'Art'];
 
-const DirectSunflowerStore: React.FC = () => {
+function DirectSunflowerStore() {
   const [filter, setFilter] = useState('All');
 
-  const socialLinks = [
-    { name: "Instagram", icon: <Globe size={18} />, url: "https://www.instagram.com/thetwoninety/" },
-    { name: "SoundCloud", icon: <Music size={18} />, url: "https://soundcloud.com/two290ninety" },
-  ];
-
-  const products: Product[] = [
-    { id: 1, name: "Нар Мину", category: "clothes", price: "90,000₮", image: "https://i.pinimg.com/736x/e5/b4/57/e5b45706562a6e13245ee26f94f92f59.jpg" },
-    { id: 2, name: "Нар Мину", category: "clothes", price: "90,000₮", image: "https://i.pinimg.com/736x/3d/e6/84/3de6845e0f7f2f1bc53674d76ce30750.jpg" },
-  ];
-
-  const categories = ['All', 'clothes', 'Accessories', 'Jewelry', 'Art'];
   const filteredProducts = filter === 'All' ? products : products.filter(p => p.category === filter);
 
   return (
@@ -36,7 +21,7 @@ const DirectSunflowerStore: React.FC = () => {
         <div className="absolute bottom-[-5%] right-[-10%] w-[70%] h-[40%] bg-[#FFC107]/5 rounded-full blur-[80px] md:blur-[120px]" />
       </div>
 
-      <Navigation socialLinks={socialLinks} />
+      <Navigation />
 
       <main className="max-w-[1440px] mx-auto px-4 md:px-6 pt-24 md:pt-32">
         <header className="mb-12 md:mb-20 text-center">
@@ -60,9 +45,11 @@ const DirectSunflowerStore: React.FC = () => {
 
           <div className="w-full overflow-x-auto no-scrollbar pb-4 md:pb-0">
             <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 bg-[#111]/50 p-1 rounded-full border border-white/5 backdrop-blur-sm w-max mx-auto px-2">
-              {categories.map((cat) => (
+              {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
+                  type="button"
+                  aria-pressed={filter === cat}
                   onClick={() => setFilter(cat)}
                   className={`px-5 md:px-8 py-2 rounded-full text-[9px] md:text-[10px] uppercase tracking-widest transition-all ${
                     filter === cat 
@@ -116,47 +103,34 @@ const DirectSunflowerStore: React.FC = () => {
                 </motion.div>
               </Link>
             ))}
+            {filteredProducts.length === 0 && (
+              <motion.p
+                key="empty-products"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="col-span-full py-24 text-center text-xs uppercase tracking-[0.3em] text-gray-600"
+              >
+                Энэ ангилалд бүтээгдэхүүн хараахан нэмэгдээгүй байна.
+              </motion.p>
+            )}
           </AnimatePresence>
         </motion.div>
 
         <footer className="py-12 md:py-20 border-t border-white/5 text-center">
-          <div className="flex justify-center space-x-8 md:space-x-12 mb-8 md:mb-10">
-            {socialLinks.map((link, i) => (
-              <motion.a 
-                key={i} 
-                href={link.url} 
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }} 
-                className="text-gray-600 transition-colors hover:text-[#FFC107]"
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </div>
+          <SocialIconLinks
+            className="flex justify-center space-x-8 md:space-x-12 mb-8 md:mb-10"
+            linkClassName="text-gray-600 transition-all hover:scale-110 hover:text-[#FFC107] active:scale-90"
+            iconSize={18}
+          />
           <p className="text-[8px] md:text-[9px] uppercase tracking-[0.5em] md:tracking-[0.8em] text-gray-700">
             TWOGO • 2026
           </p>
         </footer>
       </main>
 
-      <style jsx global>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 12s linear infinite;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
-};
+}
 
 export default DirectSunflowerStore;

@@ -1,46 +1,39 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { 
-  Music, Globe, Disc, Users, Star, Sun, 
-  Calendar, Clock, ChevronDown, ChevronUp 
+import { useState } from 'react';
+import Image from "next/image";
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Disc, Star, Sun,
+  Calendar, Clock, ChevronDown, ChevronUp, Users
 } from 'lucide-react';
 import Navigation from "../components/Navigation";
+import { FADE_IN_UP } from "../../constants/motion";
 
-const ArtistPortfolio: React.FC = () => {
+const ALBUM_INFO = {
+  name: "290",
+  subName: "290",
+  releaseDate: "2026.03.28",
+  duration: "27 минут",
+  producers: ["FRUITYBAACHKA", "TONY", "QUAD", "TUUG18"],
+  features: ["TUUG18", "BEKATRINA", "DVRELZ", "BPXC"],
+  tracks: [
+    { id: "01", title: "INTRO", duration: "1:45" },
+    { id: "02", title: "GUDAMJ", duration: "3:12" },
+    { id: "03", title: "40K50K220K", duration: "2:58" },
+    { id: "04", title: "BEMR", feature: "DVRELZ", duration: "3:30" },
+    { id: "05", title: "WERK", feature: "BEKATRINA", duration: "2:45" },
+    { id: "06", title: "BACHT ONNA YACHT", feature: "TUUG18", duration: "3:05" },
+    { id: "07", title: "HNDITGHV", feature: "BPXC", duration: "2:50" },
+    { id: "08", title: "THOUGHTS/TSETSEG", feature: "BPXC", duration: "3:15" },
+    { id: "09", title: "HOVORHON", duration: "3:40" },
+  ],
+};
+
+const ALBUM_COVER =
+  "https://res.cloudinary.com/do7jyitxi/image/upload/q_auto/f_auto/v1780750529/ab67616d00001e023fe84720a9f90e925d130d9d_xs2fs1.jpg";
+
+function AlbumNinePage() {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const socialLinks = [
-    { name: "Instagram", icon: <Globe size={20} />, url: "https://www.instagram.com/thetwoninety/" },
-    { name: "SoundCloud", icon: <Music size={20} />, url: "https://soundcloud.com/two290ninety" },
-  ];
-
-  const artistData = {
-    name: "290",
-    subName: "290",
-    releaseDate: "2026.03.28",
-    duration: "27 минут",
-    producers: ["FRUITYBAACHKA", "TONY", "QUAD", "TUUG18"],
-    features: ["TUUG18", "BEKATRINA", "DVRELZ", "BPXC"],
-    tracks: [
-      { id: "01", title: "INTRO", duration: "1:45" },
-      { id: "02", title: "GUDAMJ", duration: "3:12" },
-      { id: "03", title: "40K50K220K", duration: "2:58" },
-      { id: "04", title: "BEMR", feature: "DVRELZ", duration: "3:30" },
-      { id: "05", title: "WERK", feature: "BEKATRINA", duration: "2:45" },
-      { id: "06", title: "BACHT ONNA YACHT", feature: "TUUG18", duration: "3:05" },
-      { id: "07", title: "HNDITGHV", feature: "BPXC", duration: "2:50" },
-      { id: "08", title: "THOUGHTS/TSETSEG", feature: "BPXC", duration: "3:15" },
-      { id: "09", title: "HOVORHON", duration: "3:40" },
-    ],
-  };
-
-  const albumCover = "https://i.pinimg.com/736x/d7/53/bf/d753bfcbcadc71badf4580ccf534a27d.jpg";
-
-  const fadeInUp: Variants = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-  };
 
   return (
     <div className="min-h-screen bg-[#080808] text-white font-sans selection:bg-[#FFC107] selection:text-black overflow-x-hidden">
@@ -52,7 +45,7 @@ const ArtistPortfolio: React.FC = () => {
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50L60 0L50 50L40 0L50 50Z' fill='%23FFC107'/%3E%3C/svg%3E")` }} />
       </div>
 
-      <Navigation socialLinks={socialLinks} />
+      <Navigation />
 
       <main className="max-w-7xl mx-auto px-5 md:px-10 pt-20 md:pt-32 pb-20">
         
@@ -89,7 +82,7 @@ const ArtistPortfolio: React.FC = () => {
 
             <motion.div initial={{ y: 15, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="mt-[-0.5rem] md:mt-0 flex flex-col items-center">
               <p className="text-[10px] md:text-xl font-bold tracking-[1.2em] md:tracking-[1.5em] text-[#FFC107] uppercase ml-[1.2em]">
-                {artistData.subName}
+                {ALBUM_INFO.subName}
               </p>
               <div className="flex items-center gap-3 mt-4">
                 <Sun className="text-[#FFC107] animate-pulse" size={14} />
@@ -106,23 +99,29 @@ const ArtistPortfolio: React.FC = () => {
         <section className="grid lg:grid-cols-2 gap-12 md:gap-20 items-start mb-24 md:mb-40">
            
            {/* Left: Album Cover (Чиний ирүүлсэн загвар) */}
-           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="relative group max-w-2xl mx-auto lg:mx-0">
+           <motion.div variants={FADE_IN_UP} initial="initial" whileInView="whileInView" className="relative group max-w-2xl mx-auto lg:mx-0">
               <div className="absolute -inset-4 bg-[#FFC107]/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
               <div className="relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
-                <img src={albumCover} alt="Album 9" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image
+                  src={ALBUM_COVER}
+                  alt="290 — Album 9 цомгийн нүүр"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70" />
                 <div className="absolute bottom-5 left-5 md:bottom-8 md:left-8">
                    <p className="text-[#FFC107] text-[10px] font-bold tracking-[0.3em] uppercase mb-2"></p>
                    <div className="flex gap-4 md:gap-6 mt-4">
-                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-bold text-[#FFC107]"><Calendar size={14}/> {artistData.releaseDate}</div>
-                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-bold text-[#FFC107]"><Clock size={14}/> {artistData.duration}</div>
+                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-bold text-[#FFC107]"><Calendar size={14}/> {ALBUM_INFO.releaseDate}</div>
+                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-bold text-[#FFC107]"><Clock size={14}/> {ALBUM_INFO.duration}</div>
                    </div>
                 </div>
               </div>
            </motion.div>
 
            {/* Right: Tracklist with See More */}
-           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="w-full">
+           <motion.div variants={FADE_IN_UP} initial="initial" whileInView="whileInView" className="w-full">
               <div className="flex items-center gap-4 mb-8 md:mb-12 border-b border-white/10 pb-6">
                 <Disc className="text-[#FFC107] animate-spin-slow" size={20} />
                 <h3 className="text-xl md:text-2xl font-black tracking-widest uppercase italic bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">Tracklist</h3>
@@ -131,7 +130,7 @@ const ArtistPortfolio: React.FC = () => {
 
               <div className="space-y-1">
                 <AnimatePresence initial={false}>
-                  {(isExpanded ? artistData.tracks : artistData.tracks.slice(0, 5)).map((track, idx) => (
+                  {(isExpanded ? ALBUM_INFO.tracks : ALBUM_INFO.tracks.slice(0, 5)).map((track, idx) => (
                     <motion.div 
                       key={track.id}
                       initial={{ opacity: 0, x: -20 }}
@@ -155,7 +154,7 @@ const ArtistPortfolio: React.FC = () => {
                 </AnimatePresence>
 
                 {/* See More Toggle */}
-                {artistData.tracks.length > 5 && (
+                {ALBUM_INFO.tracks.length > 5 && (
                   <motion.button
                     whileHover={{ y: -2 }}
                     onClick={() => setIsExpanded(!isExpanded)}
@@ -164,7 +163,7 @@ const ArtistPortfolio: React.FC = () => {
                     {isExpanded ? (
                       <>Show Less <ChevronUp size={16} /></>
                     ) : (
-                      <>See More Tracks ({artistData.tracks.length - 5}) <ChevronDown size={16} /></>
+                      <>See More Tracks ({ALBUM_INFO.tracks.length - 5}) <ChevronDown size={16} /></>
                     )}
                   </motion.button>
                 )}
@@ -174,11 +173,11 @@ const ArtistPortfolio: React.FC = () => {
 
         {/* --- INFO CARDS --- */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-24 md:mb-40">
-           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm group">
+           <motion.div variants={FADE_IN_UP} initial="initial" whileInView="whileInView" className="p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm group">
               <Users className="text-[#FFC107] mb-6 group-hover:scale-110 transition-transform" size={28} />
               <h3 className="text-[10px] md:text-xs font-black tracking-[0.4em] uppercase text-[#FFC107] mb-8">Collaborators</h3>
               <div className="flex flex-wrap gap-2">
-                {artistData.features.map(f => (
+                {ALBUM_INFO.features.map(f => (
                   <span key={f} className="px-5 py-2.5 bg-white/5 rounded-xl text-[10px] font-bold border border-white/5 hover:bg-[#FFC107] hover:text-black transition-all cursor-default">
                     {f}
                   </span>
@@ -186,11 +185,11 @@ const ArtistPortfolio: React.FC = () => {
               </div>
            </motion.div>
 
-           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" className="p-10 rounded-[2.5rem] bg-[#FFC107]/[0.03] border border-[#FFC107]/10 backdrop-blur-sm group">
+           <motion.div variants={FADE_IN_UP} initial="initial" whileInView="whileInView" className="p-10 rounded-[2.5rem] bg-[#FFC107]/[0.03] border border-[#FFC107]/10 backdrop-blur-sm group">
               <Star className="text-[#FFC107] mb-6 group-hover:rotate-45 transition-transform" size={28} />
               <h3 className="text-[10px] md:text-xs font-black tracking-[0.4em] uppercase text-[#FFC107] mb-8">Creative Team</h3>
               <div className="flex flex-wrap gap-2">
-                {artistData.producers.map(p => (
+                {ALBUM_INFO.producers.map(p => (
                   <span key={p} className="px-5 py-2.5 bg-black/40 rounded-xl text-[10px] font-bold border border-[#FFC107]/20 hover:bg-[#FFC107] hover:text-black transition-all cursor-default">
                     {p}
                   </span>
@@ -203,7 +202,7 @@ const ArtistPortfolio: React.FC = () => {
         <footer className="text-center py-16 md:py-20 relative border-t border-white/5">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
             <h2 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white opacity-5 mb-4">
-              {artistData.name}
+              {ALBUM_INFO.name}
             </h2>
             <p className="text-[8px] md:text-[10px] font-bold tracking-[0.8em] md:tracking-[1.2em] text-gray-600 uppercase">
               TWOGO •  2026
@@ -213,19 +212,8 @@ const ArtistPortfolio: React.FC = () => {
 
       </main>
 
-      <style jsx global>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 15s linear infinite;
-        }
-        html { scroll-behavior: smooth; }
-        ::selection { background: #FFC107; color: #000; }
-      `}</style>
     </div>
   );
-};
+}
 
-export default ArtistPortfolio;
+export default AlbumNinePage;

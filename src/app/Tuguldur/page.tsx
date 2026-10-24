@@ -15,7 +15,7 @@ interface ArtistData {
 const ARTIST_DATA: ArtistData = {
   name: "290",
   subName: "(M. Tuguldur)",
-  lifespan: "2000.03.28 — 2025.12.04",
+  lifespan: "2000 — ∞",
   skills: ["Songwriting", "Producing", "Drawing", "Mix & Mastering"],
 };
 
